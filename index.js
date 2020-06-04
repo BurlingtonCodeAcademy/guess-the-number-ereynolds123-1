@@ -53,7 +53,7 @@ async function start() {
       max = randomInteger;
       randomInteger=randomNum(min, max);
       console.log("The computer guessed: " + randomInteger);
-      computerTurns++
+      computerTurns++;
     }else if(higherLower==="correct"|| higherLower==="C"){
       console.log("Congratulations! You have won in "+ computerTurns +" turns.")
     }
