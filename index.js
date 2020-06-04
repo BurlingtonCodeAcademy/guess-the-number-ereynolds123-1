@@ -8,19 +8,12 @@ function ask(questionText) {
   });
 }
 
-//Variable declarations
-//let randomInteger= randomInt(100);
-let min = 1;
-let max = 100;
-let randomInteger = randomNum(min, max);
-let computerTurns = 0;
-
 //Function starts the game
 start();
 
 //Function that gives random number in a range
 function randomNum(min, max) {
-  let computerGuess = Math.floor((max+min)/2);  
+  let computerGuess = Math.floor((max + min)/2);  
   return computerGuess;
 }
 
@@ -29,6 +22,14 @@ async function start() {
   console.log(
     "Let's play a game where you (human) make up a number and I (computer) try to guess it."
   );
+  //User inputs a min and max range
+  let min= await ask("What is the minimum number you want for the range of game?");
+  min=+min;
+  let max= await ask ("What is the maximum number you want for the range of the game?");
+  max=+max;
+  let randomInteger = randomNum(min, max);
+  let computerTurns = 0;
+
   let secretNumber = await ask(
     "What is your secret number?\nI won't peek, I promise...\n"
   );
@@ -54,6 +55,7 @@ async function start() {
       randomInteger=randomNum(min, max);
       console.log("The computer guessed: " + randomInteger);
       computerTurns++;
+
     }else if(higherLower==="correct"|| higherLower==="C"){
       console.log("Congratulations! You have won in "+ computerTurns +" turns.")
     }
