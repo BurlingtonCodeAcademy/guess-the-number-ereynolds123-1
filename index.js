@@ -13,7 +13,7 @@ start();
 
 //Function that gives random number in a range
 function randomNum(min, max) {
-  let computerGuess = Math.floor((max + min)/2);  
+  let computerGuess = Math.floor((max + min) / 2);
   return computerGuess;
 }
 
@@ -23,10 +23,14 @@ async function start() {
     "Let's play a game where you (human) make up a number and I (computer) try to guess it."
   );
   //User inputs a min and max range
-  let min= await ask("What is the minimum number you want for the range of game?");
-  min=+min;
-  let max= await ask ("What is the maximum number you want for the range of the game?");
-  max=+max;
+  let min = await ask(
+    "What is the minimum number you want for the range of game?"
+  );
+  min = +min;
+  let max = await ask(
+    "What is the maximum number you want for the range of the game?"
+  );
+  max = +max;
   let randomInteger = randomNum(min, max);
   let computerTurns = 0;
 
@@ -46,18 +50,32 @@ async function start() {
     );
     if (higherLower === "higher" || higherLower === "H") {
       min = randomInteger;
-      randomInteger=randomNum(min, max);
-      console.log("The computer guessed: " + randomInteger);
-      computerTurns++;
 
+      //Detects cheating
+      if (max <= min) {
+        console.log("You are a cheater");
+      } else {
+        randomInteger = randomNum(min, max);
+        console.log("The computer guessed: " + randomInteger);
+        computerTurns++;
+      }
     } else if (higherLower === "lower" || higherLower === "L") {
       max = randomInteger;
-      randomInteger=randomNum(min, max);
-      console.log("The computer guessed: " + randomInteger);
-      computerTurns++;
 
-    }else if(higherLower==="correct"|| higherLower==="C"){
-      console.log("Congratulations! You have won in "+ computerTurns +" turns.")
+      //Detects cheating
+      if (min >= max) {
+        console.log("You are a cheater");
+        process.exit();
+
+      } else {
+        randomInteger = randomNum(min, max);
+        console.log("The computer guessed: " + randomInteger);
+        computerTurns++;
+      }
+    } else if (higherLower === "correct" || higherLower === "C") {
+      console.log(
+        "Congratulations! You have won in " + computerTurns + " turns."
+      );
     }
   }
 
