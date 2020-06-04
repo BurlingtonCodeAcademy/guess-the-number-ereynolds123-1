@@ -20,7 +20,7 @@ start();
 
 //Function that gives random number in a range
 function randomNum(min, max) {
-  let computerGuess = Math.floor(Math.random() * (max - min + 1) + min);  
+  let computerGuess = Math.floor((max+min)/2);  
   return computerGuess;
 }
 
