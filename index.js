@@ -23,31 +23,32 @@ async function start() {
     "Let's play a game where you (human) make up a number and I (computer) try to guess it."
   );
 
-  //User inputs a min and max range
-  //Variable Declarations
+  // Variable Declarations
+  //Input for minimum
   let min = await ask(
     "What is the minimum number you want for the range of game?"
   );
- 
+
   //Sanitizes min so that the min must be a positive integer
   while (Number.isInteger(parseInt(min)) !== true || parseInt(min) <= 0) {
     console.log("Please enter a positive integer");
-    min= await ask(
+    min = await ask(
       "What is the minimum number you want for the range of game?"
     );
   }
   min = +min;
 
-
+  //Input for maximum number
   let max = await ask(
     "What is the maximum number you want for the range of the game?"
   );
 
-
   //Sanitizes max so the maximum must be a positive integer and max must be greater than min
   while (Number.isInteger(parseInt(max)) !== true || parseInt(max) <= min) {
-    console.log("Please enter a positive integer greater than your minimum number");
-    max= await ask(
+    console.log(
+      "Please enter a positive integer greater than your minimum number"
+    );
+    max = await ask(
       "What is the minimum number you want for the range of game?"
     );
   }
@@ -55,12 +56,11 @@ async function start() {
 
   let randomInteger = randomNum(min, max);
   let computerTurns = 0;
-
   let secretNumber = await ask(
     "What is your secret number?\nI won't peek, I promise...\n"
   );
 
-  //A loop to sanitizes to an integer
+  //Sanitizes the secretNumber so that the only input allowed is a 
 
   while (
     Number.isInteger(parseInt(secretNumber)) !== true ||
@@ -79,15 +79,15 @@ async function start() {
   );
 
   //If the guess is correct, gives victory message.
-  if (input === "yes" || input === "y") {
+  if (input.toLowerCase() === "yes" || input.toLowerCase() === "y") {
     console.log("Congratulations! You won! On the first try!");
   } else {
     //While the answer is not yes: make a guess, print guess to console, increment computerTurns
-    while (input !== "yes" || input !== "y") {
+    while (input.toLowerCase() !== "yes" || input.toLowerCase() !== "y") {
       let higherLower = await ask(
         "Is the number higher (type 'H') or lower (type 'L') or correct (type 'C')?\n"
       );
-      if (higherLower === "higher" || higherLower === "H") {
+      if (higherLower.toLowerCase() === "higher" || higherLower.toLowerCase() === "H") {
         min = randomInteger;
 
         //Detects cheating
@@ -98,7 +98,7 @@ async function start() {
           console.log("The computer guessed: " + randomInteger);
           computerTurns++;
         }
-      } else if (higherLower === "lower" || higherLower === "L") {
+      } else if (higherLower.toLowerCase() === "lower" || higherLower.toLowerCase() === "L") {
         max = randomInteger;
 
         //Detects cheating
@@ -110,7 +110,7 @@ async function start() {
           console.log("The computer guessed: " + randomInteger);
           computerTurns++;
         }
-      } else if (higherLower === "correct" || higherLower === "C") {
+      } else if (higherLower.toLowerCase() === "correct" || higherLower.toLowerCase()=== "C") {
         console.log(
           "Congratulations! You have won in " + computerTurns + " turns."
         );
@@ -122,6 +122,4 @@ async function start() {
   process.exit();
 }
 
-//Bugs
 
-//Sanitize the inputs of higher/lower/correct
