@@ -28,11 +28,29 @@ async function start() {
   let min = await ask(
     "What is the minimum number you want for the range of game?"
   );
+ 
+  //Sanitizes min so that the min must be a positive integer
+  while (Number.isInteger(parseInt(min)) !== true || parseInt(min) <= 0) {
+    console.log("Please enter a positive integer");
+    min= await ask(
+      "What is the minimum number you want for the range of game?"
+    );
+  }
   min = +min;
+
 
   let max = await ask(
     "What is the maximum number you want for the range of the game?"
   );
+
+
+  //Sanitizes max so the maximum must be a positive integer and max must be greater than min
+  while (Number.isInteger(parseInt(max)) !== true || parseInt(max) <= min) {
+    console.log("Please enter a positive integer greater than your minimum number");
+    max= await ask(
+      "What is the minimum number you want for the range of game?"
+    );
+  }
   max = +max;
 
   let randomInteger = randomNum(min, max);
@@ -106,6 +124,4 @@ async function start() {
 
 //Bugs
 
-//Sanitize min/max
 //Sanitize the inputs of higher/lower/correct
-
