@@ -13,7 +13,7 @@ start();
 
 //Function that gives random number in a range
 function randomNum(min, max) {
-  let computerGuess = parseInt((max + min) / 2);
+  let computerGuess = Math.floor((max + min) / 2 + 1);
   return computerGuess;
 }
 
@@ -42,62 +42,70 @@ async function start() {
     "What is your secret number?\nI won't peek, I promise...\n"
   );
 
-//A loop to sanitizes to an integer
+  //A loop to sanitizes to an integer
 
-  while(Number.isInteger(parseInt(secretNumber))!== true || parseInt(secretNumber) <= 0){
+  while (
+    Number.isInteger(parseInt(secretNumber)) !== true ||
+    parseInt(secretNumber) <= 0
+  ) {
     console.log("Please enter a positive integer");
-    secretNumber= await ask(
+    secretNumber = await ask(
       "What is your secret number?\nI won't peek, I promise...\n"
-    ); 
-  } 
+    );
+  }
 
-//Getting the human number input
+  //Getting the human number input
   console.log("The computer guessed: " + randomInteger);
   let input = await ask(
     "Is that your secret number? Type yes (y) or no (n).\n"
   );
 
-  //While the answer is not yes: make a guess, print guess to console, increment computerTurns
-  while (input !== "yes" || input !== "y") {
-    let higherLower = await ask(
-      "Is the number higher (type 'H') or lower (type 'L') or correct (type 'C')?\n"
-    );
-    if (higherLower === "higher" || higherLower === "H") {
-      min = randomInteger;
-
-      //Detects cheating
-      if (max <= min) {
-        console.log("You are a cheater");
-      } else {
-        randomInteger = randomNum(min, max);
-        console.log("The computer guessed: " + randomInteger);
-        computerTurns++;
-      }
-    } else if (higherLower === "lower" || higherLower === "L") {
-      max = randomInteger;
-
-      //Detects cheating
-      if (min >= max) {
-        console.log("You are a cheater");
-        process.exit();
-
-      } else {
-        randomInteger = randomNum(min, max);
-        console.log("The computer guessed: " + randomInteger);
-        computerTurns++;
-      }
-    } else if (higherLower === "correct" || higherLower === "C") {
-      console.log(
-        "Congratulations! You have won in " + computerTurns + " turns."
+  //If the guess is correct, gives victory message.
+  if (input === "yes" || input === "y") {
+    console.log("Congratulations! You won! On the first try!");
+  } else {
+    //While the answer is not yes: make a guess, print guess to console, increment computerTurns
+    while (input !== "yes" || input !== "y") {
+      let higherLower = await ask(
+        "Is the number higher (type 'H') or lower (type 'L') or correct (type 'C')?\n"
       );
-      process.exit();
+      if (higherLower === "higher" || higherLower === "H") {
+        min = randomInteger;
+
+        //Detects cheating
+        if (max <= min) {
+          console.log("You are a cheater");
+        } else {
+          randomInteger = randomNum(min, max);
+          console.log("The computer guessed: " + randomInteger);
+          computerTurns++;
+        }
+      } else if (higherLower === "lower" || higherLower === "L") {
+        max = randomInteger;
+
+        //Detects cheating
+        if (min >= max) {
+          console.log("You are a cheater");
+          process.exit();
+        } else {
+          randomInteger = randomNum(min, max);
+          console.log("The computer guessed: " + randomInteger);
+          computerTurns++;
+        }
+      } else if (higherLower === "correct" || higherLower === "C") {
+        console.log(
+          "Congratulations! You have won in " + computerTurns + " turns."
+        );
+        process.exit();
+      }
     }
   }
 
   process.exit();
 }
 
-
 //Bugs
 
+//Sanitize min/max
 //Sanitize the inputs of higher/lower/correct
+
