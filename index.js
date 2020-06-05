@@ -13,7 +13,7 @@ start();
 
 //Function that gives random number in a range
 function randomNum(min, max) {
-  let computerGuess = Math.floor((max + min) / 2);
+  let computerGuess = Math.round((max + min) / 2);
   return computerGuess;
 }
 
@@ -76,8 +76,10 @@ async function start() {
       console.log(
         "Congratulations! You have won in " + computerTurns + " turns."
       );
+      process.exit();
     }
   }
 
   process.exit();
 }
+
