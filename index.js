@@ -13,7 +13,7 @@ start();
 
 //Function that gives random number in a range
 function randomNum(min, max) {
-  let computerGuess = Math.round((max + min) / 2);
+  let computerGuess = parseInt((max + min) / 2);
   return computerGuess;
 }
 
@@ -22,22 +22,36 @@ async function start() {
   console.log(
     "Let's play a game where you (human) make up a number and I (computer) try to guess it."
   );
+
   //User inputs a min and max range
+  //Variable Declarations
   let min = await ask(
     "What is the minimum number you want for the range of game?"
   );
   min = +min;
+
   let max = await ask(
     "What is the maximum number you want for the range of the game?"
   );
   max = +max;
+
   let randomInteger = randomNum(min, max);
   let computerTurns = 0;
 
   let secretNumber = await ask(
     "What is your secret number?\nI won't peek, I promise...\n"
   );
-  console.log("You entered: " + secretNumber);
+
+//A loop to sanitizes to an integer
+
+  while(Number.isInteger(parseInt(secretNumber))!== true || parseInt(secretNumber) <= 0){
+    console.log("Please enter a positive integer");
+    secretNumber= await ask(
+      "What is your secret number?\nI won't peek, I promise...\n"
+    ); 
+  } 
+
+//Getting the human number input
   console.log("The computer guessed: " + randomInteger);
   let input = await ask(
     "Is that your secret number? Type yes (y) or no (n).\n"
@@ -46,7 +60,7 @@ async function start() {
   //While the answer is not yes: make a guess, print guess to console, increment computerTurns
   while (input !== "yes" || input !== "y") {
     let higherLower = await ask(
-      "Is the number higher (type 'H') or lower (type 'L') or correct (type 'C')?"
+      "Is the number higher (type 'H') or lower (type 'L') or correct (type 'C')?\n"
     );
     if (higherLower === "higher" || higherLower === "H") {
       min = randomInteger;
@@ -83,3 +97,7 @@ async function start() {
   process.exit();
 }
 
+
+//Bugs
+
+//Sanitize the inputs of higher/lower/correct
