@@ -36,7 +36,7 @@ async function start() {
       "What is the minimum number you want for the range of game?"
     );
   }
-  min = +min;
+  min = +min; //Coerces input to number
 
   //Input for maximum number
   let max = await ask(
