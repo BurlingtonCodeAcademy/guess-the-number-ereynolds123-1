@@ -87,7 +87,7 @@ async function start() {
       let higherLower = await ask(
         "Is the number higher (type 'H') or lower (type 'L') or correct (type 'C')?\n"
       );
-      if (higherLower.toLowerCase() === "higher" || higherLower.toLowerCase() === "H") {
+      if (higherLower.toLowerCase() === "higher" || higherLower.toLowerCase() === "h") {
         min = randomInteger;
 
         //Detects cheating
@@ -98,7 +98,7 @@ async function start() {
           console.log("The computer guessed: " + randomInteger);
           computerTurns++;
         }
-      } else if (higherLower.toLowerCase() === "lower" || higherLower.toLowerCase() === "L") {
+      } else if (higherLower.toLowerCase() === "lower" || higherLower.toLowerCase() === "l") {
         max = randomInteger;
 
         //Detects cheating
@@ -110,7 +110,7 @@ async function start() {
           console.log("The computer guessed: " + randomInteger);
           computerTurns++;
         }
-      } else if (higherLower.toLowerCase() === "correct" || higherLower.toLowerCase()=== "C") {
+      } else if (higherLower.toLowerCase() === "correct" || higherLower.toLowerCase()=== "c") {
         console.log(
           "Congratulations! You have won in " + computerTurns + " turns."
         );
