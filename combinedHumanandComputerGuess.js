@@ -11,7 +11,7 @@ function ask(questionText) {
 
 //Function that gives random number in a range
 function randomNum(min, max) {
-  let computerGuess = Math.floor((max + min) / 2 + 1);
+  let computerGuess = Math.floor((max + min) / 2);
   return computerGuess;
 }
 
@@ -74,8 +74,8 @@ async function playerStart() {
     "What is the maximum number you want for the range of the game?"
   );
 
-  //Sanitizes max so the maximum must be a positive integer and max must be greater than min
-  while (Number.isInteger(parseInt(max)) !== true || parseInt(max) <= min) {
+  //Sanitizes max
+  while (Number.isInteger(parseInt(max)) !== true ) {
     console.log(
       "Please enter a positive integer greater than your minimum number"
     );
@@ -125,10 +125,10 @@ async function playerStart() {
         higherLower.toLowerCase() === "higher" ||
         higherLower.toLowerCase() === "h"
       ) {
-        min = randomInteger;
-
+        min = randomInteger+1; 
+        
         //Detects cheating
-        if (max <= min) {
+        if (max < min) {
           console.log("You are a cheater");
         } else {
           randomInteger = randomNum(min, max);
