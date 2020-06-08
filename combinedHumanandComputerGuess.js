@@ -109,12 +109,12 @@ async function playerStart() {
     "Is that your secret number? Type yes (y) or no (n).\n"
   );
 
-  //If the guess is correct and they aren't cheating, gives victory message and asks to play again. Here's the problem
-  if (input.toLowerCase() === "yes" /*|| input.toLowerCase() === "y" */ && (randomInteger)!==secretNumber) {
+  //If the guess is correct and they aren't cheating, gives victory message and asks to play again
+  if (input.toLowerCase() === "yes" || input.toLowerCase() === "y"  && (randomInteger)!==parseInt(secretNumber)) {
     console.log("You cheated!");
     playAgain();
 
-  } else if (input.toLowerCase() === "yes" /*|| input.toLowerCase() === "y" */ && (randomInteger)===secretNumber) {
+  } else if (input.toLowerCase() === "yes" || input.toLowerCase() === "y" && (randomInteger)==parseInt(secretNumber)) {
     console.log("Congratulations! You won on the first try. ");
     playAgain();
 
@@ -195,6 +195,5 @@ async function computerGameStart() {
     }
   }
 }
-
 
 
