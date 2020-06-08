@@ -110,11 +110,11 @@ async function playerStart() {
   );
 
   //If the guess is correct and they aren't cheating, gives victory message and asks to play again
-  if (input.toLowerCase() === "yes" || input.toLowerCase() === "y" && parseInt(input)!==secretNumber) {
+  if (input.toLowerCase() === "yes" || input.toLowerCase() === "y" && parseInt(computerGuess)!==secretNumber) {
     console.log("You cheated!");
     playAgain();
 
-  } else if (input.toLowerCase() === "yes" || input.toLowerCase() === "y"  && parseInt(input)===secretNumber) {
+  } else if (input.toLowerCase() === "yes" || input.toLowerCase() === "y"  && parseInt(computerGuess)===secretNumber) {
     console.log("Congratulations! You won on the first try. ");
     playAgain();
 
