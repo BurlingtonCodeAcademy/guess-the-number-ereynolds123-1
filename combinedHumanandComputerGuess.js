@@ -80,7 +80,7 @@ async function playerStart() {
       "Please enter a positive integer greater than your minimum number"
     );
     max = await ask(
-      "What is the minimum number you want for the range of game?"
+      "What is the maximum number you want for the range of game?"
     );
   }
   max = +max;
