@@ -109,11 +109,14 @@ async function playerStart() {
     "Is that your secret number? Type yes (y) or no (n).\n"
   );
 
-  //If the guess is correct, gives victory message and asks to play again
-  if (input.toLowerCase() === "yes" || input.toLowerCase() === "y") {
-    console.log("Congratulations! You won! On the first try!");
+  //If the guess is correct and they aren't cheating, gives victory message and asks to play again
+  if (input.toLowerCase() === "yes" || input.toLowerCase() === "y" && parseInt(input)!==secretNumber) {
+    console.log("You cheated!");
     playAgain();
 
+  } else if (input.toLowerCase() === "yes" || input.toLowerCase() === "y"  && parseInt(input)===secretNumber) {
+    console.log("Congratulations! You won on the first try. ");
+    playAgain();
 
   } else {
     //While the answer is not yes: make a guess, print guess to console, increment computerTurns
@@ -192,5 +195,6 @@ async function computerGameStart() {
     }
   }
 }
+
 
 
